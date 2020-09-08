@@ -4,6 +4,7 @@ class CreateProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       imageUrl: "",
       price: "",
       quantity: "",
@@ -27,6 +28,7 @@ class CreateProduct extends Component {
         "x-access-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
+        name: this.state.name,
         imageUrl: this.state.imageUrl,
         price: this.state.price,
         quantity: this.state.quantity,
@@ -51,6 +53,18 @@ class CreateProduct extends Component {
           <form className="measure" onSubmit={this.handleSubmit}>
             <fieldset id="create_product" className="ba b--transparent ph0 mh0">
               <legend className="f4 fw6 ph0 mh0">Add New Product</legend>
+              <div className="mt3">
+                <label className="db fw6 lh-copy f6" htmlFor="name">
+                  Product Name
+                </label>
+                <input
+                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  type="text"
+                  name="name"
+                  id="name"
+                  onChange={this.handleChange}
+                />
+              </div>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="imageUrl">
                   Image Url
