@@ -1,65 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export function SalesReport({ data }) {
-  const [openOrders, setOpenOrders] = useState([]);
-  const [closedOrders, setClosedOrders] = useState([]);
-  const [openRevenue, setOpenRevenue] = useState(0);
-  const [closedRevenue, setClosedRevenue] = useState(0);
-
   function getSum(total, num) {
     for (let i = 0; i < num.length; i++) {
       total += num[i].amount;
     }
-    console.log(num);
     return total;
   }
 
-  function calculateData() {
-    console.log(data);
-    setOpenOrders(data.filter((order) => !order.isComplete));
-    setClosedOrders(data.filter((order) => order.isComplete));
-    setOpenRevenue(
-      getSum(
-        0,
-        data.filter((order) => !order.isComplete)
-      )
-    );
-    setClosedRevenue(
-      getSum(
-        0,
-        data.filter((order) => order.isComplete)
-      )
-    );
-  }
-
-  useEffect(() => {
-    calculateData();
-    // eslint-disable-next-line
-  }, []);
+  const openOrders = data.filter((order) => !order.isComplete);
+  const closedOrders = data.filter((order) => order.isComplete);
+  const openRevenue = getSum(0, openOrders);
+  const closedRevenue = getSum(0, closedOrders);
 
   return (
     <div className="pa4">
       <h1>Sales Report</h1>
       <table className="f6 w-100 mw8 center">
         <thead>
-          <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
-            Open Orders
-          </th>
-          <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
-            Closed Orders
-          </th>
-          <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
-            Total Orders
-          </th>
-          <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
-            Received Revenue
-          </th>
-          <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
-            Pending Revenue
-          </th>
-          <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
-            Total Revenue
-          </th>
+          <tr>
+            <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
+              Open Orders
+            </th>
+            <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
+              Closed Orders
+            </th>
+            <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
+              Total Orders
+            </th>
+            <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
+              Pending Revenue
+            </th>
+            <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
+              Received Revenue
+            </th>
+            <th className="fw6 bb b--black-20 tl pb3 pr3 bg-white">
+              Total Revenue
+            </th>
+          </tr>
         </thead>
         <tbody className="lh-copy">
           <tr>
@@ -79,3 +57,5 @@ export function SalesReport({ data }) {
     </div>
   );
 }
+
+export default SalesReport;

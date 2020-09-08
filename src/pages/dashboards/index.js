@@ -38,17 +38,17 @@ export function Dashboard(props) {
         <h1>Hi {localStorage.getItem("name")}!</h1>
       </div>
       {localStorage.getItem("roles") === "ROLE_ADMIN" ? (
-        <Admin orders={data} />
+        <Admin data={data} />
       ) : (
         ""
       )}
       {localStorage.getItem("roles").includes("ROLE_STAFF") ? (
-        <Staff orders={data} />
+        <Staff data={data} />
       ) : (
         ""
       )}
       {localStorage.getItem("roles").includes("ROLE_USER") ? (
-        <User orders={data} />
+        <User data={data} />
       ) : (
         ""
       )}

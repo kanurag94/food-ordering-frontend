@@ -2,26 +2,26 @@ import React from "react";
 import { Orders } from "../../components/orders";
 import SignUpCustom from "../auth/signUpCustom";
 import CreateProduct from "../products/createProduct";
-import { SalesReport } from "../../components/salesReport";
+import SalesReport from "../../components/salesReport";
 
-export function Admin({ orders }) {
+export function Admin({ data }) {
   return (
     <div>
-      <div className="bb">
-        <SalesReport userType="admin" data={orders} />
+      <div>
+        <SalesReport userType="admin" data={data} />
       </div>
       <div>
         <Orders
           userType="admin"
           title="Open Orders"
-          data={orders.filter((order) => !order.isComplete)}
+          data={data.filter((order) => !order.isComplete)}
         />
       </div>
       <div>
         <Orders
           userType="admin"
           title="Closed Orders"
-          data={orders.filter((order) => order.isComplete)}
+          data={data.filter((order) => order.isComplete)}
         />
       </div>
       <div className="flex flex-wrap">

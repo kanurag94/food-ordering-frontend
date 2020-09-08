@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 
 class SignIn extends Component {
   constructor(props) {
@@ -7,7 +6,6 @@ class SignIn extends Component {
     this.state = {
       username: "",
       password: "",
-      redirect: false,
     };
   }
 
@@ -31,18 +29,13 @@ class SignIn extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.accessToken !== null) {
-          this.setState({ redirect: true });
-        }
-        console.log(data);
-        if (data["message"] === "User Not found.") {
-          alert("User Not Found");
-          return;
-        }
-        localStorage.setItem("token", data.accessToken);
-        localStorage.setItem("name", data.username);
-        localStorage.setItem("userId", data.id);
-        localStorage.setItem("roles", data.roles);
+        if (data.message === undefined) {
+          localStorage.setItem("token", data.accessToken);
+          localStorage.setItem("name", data.username);
+          localStorage.setItem("userId", data.id);
+          localStorage.setItem("roles", data.roles);
+          window.location.replace("/dashboard");
+        } else alert(data.message);
       })
       .catch((error) => {
         console.log(error);
@@ -90,7 +83,6 @@ class SignIn extends Component {
             </div>
           </form>
         </main>
-        {this.state.redirect ? <Redirect to="/success" /> : null}
       </div>
     );
   }

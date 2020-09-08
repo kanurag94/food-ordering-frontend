@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 
 class SignUp extends Component {
   constructor(props) {
@@ -8,7 +7,6 @@ class SignUp extends Component {
       username: "",
       password: "",
       email: "",
-      redirect: false,
     };
   }
 
@@ -34,8 +32,9 @@ class SignUp extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ redirect: true });
-        console.log(data);
+        alert(data.message);
+        if (data.message === "User was registered successfully!")
+          window.location.replace("/signin");
       })
       .catch((error) => {
         console.log(error);
@@ -95,7 +94,6 @@ class SignUp extends Component {
             </div>
           </form>
         </main>
-        {this.state.redirect ? <Redirect to="/signin" /> : null}
       </div>
     );
   }

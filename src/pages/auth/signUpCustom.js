@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 
 class SignUpCustom extends Component {
   constructor(props) {
@@ -9,7 +8,6 @@ class SignUpCustom extends Component {
       password: "",
       email: "",
       roles: "",
-      redirect: false,
     };
   }
 
@@ -39,11 +37,7 @@ class SignUpCustom extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ redirect: true });
-        console.log(data);
-        if (data.message === "User was registered successfully!") {
-          alert("User was registered successfully");
-        } else alert("Failed to create user");
+        alert(data.message);
       })
       .catch((error) => {
         console.log(error);
@@ -116,7 +110,6 @@ class SignUpCustom extends Component {
             </div>
           </form>
         </main>
-        {this.state.redirect ? <Redirect to="/dashboard" /> : null}
       </div>
     );
   }

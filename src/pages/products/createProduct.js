@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -8,7 +7,6 @@ class CreateProduct extends Component {
       imageUrl: "",
       price: "",
       quantity: "",
-      redirect: false,
     };
   }
 
@@ -37,7 +35,6 @@ class CreateProduct extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ redirect: true });
         window.location.reload();
         console.log(data);
       })
@@ -51,7 +48,7 @@ class CreateProduct extends Component {
       <div className="pa4">
         <main className="pa4 black-80">
           <form className="measure" onSubmit={this.handleSubmit}>
-            <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+            <fieldset id="create_product" className="ba b--transparent ph0 mh0">
               <legend className="f4 fw6 ph0 mh0">Add New Product</legend>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="imageUrl">
@@ -99,7 +96,6 @@ class CreateProduct extends Component {
             </div>
           </form>
         </main>
-        {this.state.redirect ? <Redirect to="/" /> : null}
       </div>
     );
   }
