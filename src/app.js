@@ -5,7 +5,6 @@ import NotFound from "./pages/not-found";
 import SignIn from "./pages/auth/signIn";
 import SignUp from "./pages/auth/signUp";
 import Dashboard from "./pages/dashboards/index";
-import Success from "./pages/success/demoSuccess";
 import Navbar from "./components/navbar";
 import { SingleProduct } from "./pages/products/singleProduct";
 
@@ -27,9 +26,6 @@ function App() {
           </Route>
           <Route path="/dashboard" exact>
             <Dashboard />
-          </Route>
-          <Route path="/success" exact>
-            <Success />
           </Route>
           <Route>
             <NotFound />

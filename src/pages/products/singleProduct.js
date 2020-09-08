@@ -1,7 +1,7 @@
 import { fetchMaterial } from "../../services/material-service";
 import React, { useEffect, useState } from "react";
 import MaterialCard from "../../material-card";
-import { Redirect } from "react-router-dom";
+import OrderSuccess from "../success/orderSuccess";
 
 export function SingleProduct({ match }) {
   const [data, setData] = useState([]);
@@ -33,8 +33,10 @@ export function SingleProduct({ match }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setRedirect(true);
+        alert(data.message);
+        if (data.message === "Deleted the product successfully") {
+          window.location.replace("/");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -73,6 +75,14 @@ export function SingleProduct({ match }) {
 
   if (!data.length) {
     return <div className="pa4">Loading...</div>;
+  }
+
+  if (redirect) {
+    return (
+      <div>
+        <OrderSuccess />
+      </div>
+    );
   }
 
   return (
@@ -117,7 +127,6 @@ export function SingleProduct({ match }) {
       ) : (
         ""
       )}
-      {redirect === true ? <Redirect to="/success" /> : ""}
     </div>
   );
 }

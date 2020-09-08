@@ -35,8 +35,9 @@ class CreateProduct extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        window.location.reload();
-        console.log(data);
+        alert(data.message);
+        if (data.message === "Product created successfully!")
+          window.location.reload();
       })
       .catch((error) => {
         console.log(error);

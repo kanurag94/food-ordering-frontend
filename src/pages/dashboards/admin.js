@@ -7,8 +7,16 @@ import SalesReport from "../../components/salesReport";
 export function Admin({ data }) {
   return (
     <div>
-      <div>
-        <SalesReport userType="admin" data={data} />
+      <div className="flex flex-wrap ">
+        <div>
+          <SalesReport userType="admin" data={data} />
+        </div>
+        <div className="bl">
+          <SignUpCustom />
+        </div>
+        <div className="bl">
+          <CreateProduct />
+        </div>
       </div>
       <div>
         <Orders
@@ -23,14 +31,6 @@ export function Admin({ data }) {
           title="Closed Orders"
           data={data.filter((order) => order.isComplete)}
         />
-      </div>
-      <div className="flex flex-wrap">
-        <div className="bl">
-          <SignUpCustom />
-        </div>
-        <div className="bl">
-          <CreateProduct />
-        </div>
       </div>
     </div>
   );
